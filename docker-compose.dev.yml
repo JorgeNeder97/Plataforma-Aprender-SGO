@@ -1,0 +1,59 @@
+services:
+  aprender_backend:
+    container_name: aprender_backend_dev
+    build: 
+      context: ./backend
+      dockerfile: Dockerfile.dev
+    command: >
+      sh -c "/wait-for-postgres.sh aprender_db_dev &&
+             python manage.py makemigrations &&
+             python manage.py migrate &&
+             python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - ./backend:/app
+    ports:
+     - 8020:8000
+    env_file:
+        - ./backend/core/.env.dev
+    depends_on:
+      - aprender_redis
+      - aprender_db
+  aprender_frontend:
+    container_name: aprender_frontend_dev
+    build: 
+      context: ./frontend/aprender-front
+      dockerfile: Dockerfile.dev
+    working_dir: /app
+    command: npm run dev
+    volumes:
+      - ./frontend/aprender-front:/app
+      - /app/node_modules
+    ports:
+      - 3020:3000
+  aprender_redis:
+    image: redis
+    container_name: aprender_redis_dev
+    ports:
+      - 6380:6379
+  aprender_db:
+    image: postgres
+    container_name: aprender_db_dev
+    restart: always
+    env_file:
+        - ./backend/core/.env.dev
+    ports:
+      - 5434:5432
+    volumes:
+      - postgres_data_dev:/var/lib/postgresql/data
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: aprender_pgadmin_dev
+    restart: always
+    env_file:
+      - ./backend/core/.env.dev
+    ports:
+      - 5020:80
+    depends_on:
+      - aprender_db
+volumes:
+  postgres_data_dev:

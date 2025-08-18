@@ -1,0 +1,72 @@
+@import "tailwindcss";
+@plugin "daisyui" {
+    themes: false;
+    prefix: "d-";
+};
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+
+  /* Sombras */
+  --shadow-form: "5px 5px 15px #333";
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+@layer components {
+    
+    /* Formularios */
+    
+    .form__page {
+        @apply bg-neutral-700 min-h-[calc(100vh)] flex place-items-center place-content-center
+    }
+
+    .form__container {
+        @apply flex flex-col place-items-center place-content-center gap-[20px]
+    }
+
+    .form__title {
+        @apply text-[2rem] text-white
+    }
+
+    .form {
+        @apply relative flex flex-col w-[80vw] max-w-[400px] place-items-center 
+        place-content-center gap-[15px] text-white bg-neutral-900 shadow-form 
+        rounded-xl px-[5px] py-[30px] 
+    }
+
+    .form__label-input-span {
+        @apply flex flex-col place-items-start gap-[10px]
+    }
+
+    .form__label {
+        @apply text-[1rem] text-white
+    }
+
+    .form__input {
+        @apply bg-neutral-100 h-[35px] max-w-[300px] text-[.813rem] pl-[5px] text-black rounded
+        focus:outline-2 focus:outline-emerald-500
+    }
+
+    .form__error-span {
+        @apply h-[10px] text-[0.625rem] text-red-500 transition-all duration-[.3s] ease-in-out
+        lg:text-[.75rem]
+    }
+
+    .form__send {
+        @apply px-[20px] py-[10px] rounded bg-emerald-600 text-white hover:cursor-pointer
+    }
+}
