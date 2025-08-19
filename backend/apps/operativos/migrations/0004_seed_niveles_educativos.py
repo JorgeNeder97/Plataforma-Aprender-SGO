@@ -10,7 +10,7 @@ NIVELES_EDUCATIVOS = [
 
 def forward(apps, schema_editor):
     Nivel_educativo = apps.get_model("operativos", "Nivel_Educativo")
-    for nivel in Nivel_educativo:
+    for nivel in NIVELES_EDUCATIVOS:
         Nivel_educativo.objects.get_or_create(nombre=nivel)
 
 

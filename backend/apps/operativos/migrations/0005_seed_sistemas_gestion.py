@@ -4,13 +4,13 @@ from django.db import migrations
 
 
 SISTEMAS_GESTION = [
-    'Estatal', 'Privada'
+    'Privada', 'Estatal'
 ]
 
 
 def forward(apps, schema_editor):
     Sistema_gestion = apps.get_model("operativos", "Sistema_Gestion")
-    for sistema_gestion in Sistema_gestion:
+    for sistema_gestion in SISTEMAS_GESTION:
         Sistema_gestion.objects.get_or_create(nombre=sistema_gestion)
 
 

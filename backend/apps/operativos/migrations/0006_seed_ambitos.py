@@ -3,6 +3,21 @@
 from django.db import migrations
 
 
+AMBITOS = [
+    'Rural', 'Urbano'
+]
+
+
+def forward(apps, schema_editor):
+    Ambitos = apps.get_model("operativos", "Ambito")
+    for amb in AMBITOS:
+        Ambitos.objects.get_or_create(nombre=amb)
+    
+
+def reverse(apps, schema_editor):
+    pass
+
+
 class Migration(migrations.Migration):
 
     dependencies = [
@@ -10,4 +25,5 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
+        migrations.RunPython(forward, reverse_code=migrations.RunPython.noop)
     ]

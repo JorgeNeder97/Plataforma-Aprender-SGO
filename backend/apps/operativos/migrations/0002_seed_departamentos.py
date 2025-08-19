@@ -29,7 +29,7 @@ def reverse(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ("operativos", "0001_seed_departamentos"),  # asegúrate que apunte a la migración que crea Departamento
+        ("operativos", "0001_initial"),  # asegúrate que apunte a la migración que crea Departamento
     ]
 
     operations = [
