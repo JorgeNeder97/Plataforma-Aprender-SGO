@@ -1,9 +1,32 @@
-const page = () => {
+import Contactanos from '@/components/Contactanos';
+import HeroClient from '@/components/Hero/HeroClient';
+import Ingreso from '@/components/Ingreso';
+import Nav from '@/components/Nav';
+import NavMobile from '@/components/NavMobile';
+import Operativos from '@/components/Operativos';
+import SobreNosotros from '@/components/SobreNosotros';
+import SobreNosotrosMobile from '@/components/SobreNosotrosMobile';
+
+
+const HomePage = () => {
+
     return (
-        <main className="bg-neutral-700 pt-[100px] min-h-[calc(100vh)]">
-            <h1 className="text-center text-white text-[48px]">Home</h1>
-        </main>
+        <>
+            <NavMobile />
+            <Nav />
+            <main>
+                <HeroClient />
+                <Ingreso />
+                <Operativos />
+                <SobreNosotros />
+                <SobreNosotrosMobile />
+            </main>
+            <footer>
+                <Contactanos />
+            </footer>
+        </>
     );
 };
 
-export default page;
+
+export default HomePage;
